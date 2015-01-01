@@ -28,20 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tv_test = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
+            // 
+            // tv_test
+            // 
+            this.tv_test.Location = new System.Drawing.Point(13, 13);
+            this.tv_test.Name = "tv_test";
+            this.tv_test.Size = new System.Drawing.Size(435, 332);
+            this.tv_test.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 176);
+            this.ClientSize = new System.Drawing.Size(460, 357);
+            this.Controls.Add(this.tv_test);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TreeView tv_test;
     }
 }
 
