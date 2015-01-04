@@ -27,22 +27,16 @@ using System.Windows.Forms;
  */
 namespace PcCrawler
 {
-    public partial class Form1 : Form
+    public partial class Crawler : Form
     {
-        public Form1()
+        public Crawler()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DirectoryCrawler dCrawler = new DirectoryCrawler();
-            dCrawler.Crawl();
-            foreach (var directoryRootNode in dCrawler.DirektoryRootNodes)
-            {
-                TreeFiller(directoryRootNode, tv_test);
-            }
-            
+ 
         }
 
         /// <summary>
@@ -64,6 +58,20 @@ namespace PcCrawler
             {
                 TreeFiller(node, tv, currentNode);
             }
+        }
+
+        private void bt_test_Click(object sender, EventArgs e)
+        {
+            DirectoryCrawler dCrawler = new DirectoryCrawler();
+            dCrawler.Crawl();
+            FileCrawler fCrawler = new FileCrawler(dCrawler.DirektoryRootNodes.ElementAt(0));
+            fCrawler.Crawl();
+
+            foreach (var directoryRootNode in dCrawler.DirektoryRootNodes)
+            {
+                TreeFiller(directoryRootNode, tv_test);
+            }
+            
         }
     }
 }

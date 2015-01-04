@@ -29,8 +29,9 @@ namespace PcCrawler
     /// </summary>
     class DirectoryNode
     {
-        public DirectoryInfo DirektoryInformations { get; private set; }
+        public DirectoryInfo DirektoryInformation { get; private set; }
         public List<DirectoryNode> ChildNodes { get; private set; }
+        public List<KeyValuePair<string,FileInfo>> FileInformations { get; private set; }
 
         /// <summary>
         /// 
@@ -38,13 +39,14 @@ namespace PcCrawler
         /// <param name="DirInfo">representig the curent direktory</param>
         public DirectoryNode(DirectoryInfo DirInfo)
         {
-            this.DirektoryInformations = DirInfo;
+            this.DirektoryInformation = DirInfo;
             this.ChildNodes = new List<DirectoryNode>();
+            this.FileInformations = new List<KeyValuePair<string, FileInfo>>();
         }
 
         public override string ToString()
         {
-            return this.DirektoryInformations.Name;
+            return this.DirektoryInformation.Name;
         }
     }
 }

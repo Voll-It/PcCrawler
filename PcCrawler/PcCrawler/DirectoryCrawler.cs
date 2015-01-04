@@ -73,7 +73,7 @@ namespace PcCrawler
         /// <param name="dirInfos"></param>
         private void direktoryWalker(DirectoryNode rootPath)
         {
-            DirectoryInfo[] tempdirInfos = rootPath.DirektoryInformations.GetDirectories();
+            DirectoryInfo[] tempdirInfos = rootPath.DirektoryInformation.GetDirectories();
 
             if (tempdirInfos.Length != 0)
             {
