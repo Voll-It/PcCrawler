@@ -7,6 +7,24 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Diagnostics;
 
+/****************************************************************************************************
+ * Crawls datas from a Windows system, an save, to compare them.                                    *
+ * Copyright (C) 2015  Emanuel Vollmer                                                              *
+ * This program is free software;                                                                   *
+ * you can redistribute it and/or modify it under the terms of the GNU                              *
+ * General Public License as published by the Free Software Foundation;                             *
+ * either version 3 of the License, or (at your option) any later version.                          *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        *
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        *
+ * See the GNU General Public License for more details.                                             *
+ * You should have received a copy of the GNU General Public License along with this program;       *
+ * if not, see <http://www.gnu.org/licenses/>.                                                      *
+ *                                                                                                  *
+ * Author: Emanuel Vollmer                                                                          *
+ * Date: 4.1.2015                                                                                   *
+ * **************************************************************************************************
+ */
+
 namespace PcCrawler
 {
     class FileCrawler
@@ -21,11 +39,12 @@ namespace PcCrawler
         public void Crawl()
         {
             Tools.DebugTools.StartTimeWatch("FileCrawlerStart");
-            directoryWalker(rootNode);
+            //directoryWalker(rootNode);
             Tools.DebugTools.StopTimeWatch("FileCrawlerStart");
         }
 
-        private void directoryWalker(DirectoryNode dirNode)
+
+        private void directoryWalker(DirectoryNode dirNode,bool hashing = true,bool fastHashing = false)
         {
             Tools.DebugTools.StartTimeWatch(dirNode.DirektoryInformation.FullName);
             using (SHA512 hashProvider = SHA512Managed.Create())
@@ -42,8 +61,13 @@ namespace PcCrawler
                             using (Stream fileStream = new BufferedStream(currentFile.OpenRead(), 1048576))
                             {
                                 Debug.Print("Current : {0}", currentFile.FullName);
-                                byte[] hash = hashProvider.ComputeHash(fileStream);
-                                string hashString = BitConverter.ToString(hash).Replace("-", String.Empty);
+
+                                string hashString = string.Empty;
+                                if (hashing)
+                                {
+                                    hashString = calculateHash(hashProvider, fileStream, fastHashing);
+                                }
+
                                 node.FileInformations.Add(
                                     new KeyValuePair<string, FileInfo>(hashString, currentFile)
                                     );
@@ -58,6 +82,13 @@ namespace PcCrawler
                 }
             }
             Tools.DebugTools.StopTimeWatch(dirNode.DirektoryInformation.FullName);
+        }
+
+        private string calculateHash(SHA512 hashProvider, Stream fileStream, bool fastHashing)
+        {
+            ///TODO : implement fast hashing 
+            byte[] hash = hashProvider.ComputeHash(fileStream);
+            return BitConverter.ToString(hash).Replace("-", String.Empty);
         }
     }
 }

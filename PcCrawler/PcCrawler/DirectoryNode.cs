@@ -33,6 +33,9 @@ namespace PcCrawler
         public List<DirectoryNode> ChildNodes { get; private set; }
         public List<KeyValuePair<string,FileInfo>> FileInformations { get; private set; }
 
+
+        public bool IsReadable { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

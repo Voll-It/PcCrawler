@@ -29,6 +29,8 @@ namespace PcCrawler
 {
     public partial class Crawler : Form
     {
+        private bool strgPresed = false;
+
         public Crawler()
         {
             InitializeComponent();
@@ -62,16 +64,26 @@ namespace PcCrawler
 
         private void bt_test_Click(object sender, EventArgs e)
         {
-            DirectoryCrawler dCrawler = new DirectoryCrawler();
-            dCrawler.Crawl();
-            FileCrawler fCrawler = new FileCrawler(dCrawler.DirektoryRootNodes.ElementAt(0));
-            fCrawler.Crawl();
-
-            foreach (var directoryRootNode in dCrawler.DirektoryRootNodes)
+            propertyGrid1.
+            using (Form waitingForm = new UserInformation("Reading Filesystem"))
             {
-                TreeFiller(directoryRootNode, tv_test);
+                waitingForm.Show(this);
+                waitingForm.Refresh();
+                this.Enabled = false;
+
+                DirectoryCrawler dCrawler = new DirectoryCrawler();
+                dCrawler.Crawl();
+                FileCrawler fCrawler = new FileCrawler(dCrawler.DirektoryRootNodes.ElementAt(0));
+                fCrawler.Crawl();
+
+                foreach (var directoryRootNode in dCrawler.DirektoryRootNodes)
+                {
+                    TreeFiller(directoryRootNode, tv_test);
+                }
+
+                waitingForm.Hide();
+                this.Enabled = true;
             }
-            
         }
     }
 }

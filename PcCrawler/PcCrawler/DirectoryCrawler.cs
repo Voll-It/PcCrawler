@@ -8,15 +8,15 @@ using System.Diagnostics;
 
 /****************************************************************************************************
  * Crawls datas from a Windows system, an save, to compare them.                                    *
- * Copyright (C) 2015  Emanuel Vollmer                                                              *                                                               
- * This program is free software;                                                                   * 
- * you can redistribute it and/or modify it under the terms of the GNU                              * 
+ * Copyright (C) 2015  Emanuel Vollmer                                                              *
+ * This program is free software;                                                                   *
+ * you can redistribute it and/or modify it under the terms of the GNU                              *
  * General Public License as published by the Free Software Foundation;                             *
  * either version 3 of the License, or (at your option) any later version.                          *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        * 
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        *
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        *
  * See the GNU General Public License for more details.                                             *
- * You should have received a copy of the GNU General Public License along with this program;       * 
+ * You should have received a copy of the GNU General Public License along with this program;       *
  * if not, see <http://www.gnu.org/licenses/>.                                                      *
  *                                                                                                  *
  * Author: Emanuel Vollmer                                                                          *
@@ -69,11 +69,10 @@ namespace PcCrawler
         /// Recoursiv helper funktion that moves each folder path to the end an
         /// add the DirektoryInfo to the second param.
         /// </summary>
-        /// <param name="rootPath"></param>
-        /// <param name="dirInfos"></param>
-        private void direktoryWalker(DirectoryNode rootPath)
+        /// <param name="rootNode"></param>
+        private void direktoryWalker(DirectoryNode rootNode)
         {
-            DirectoryInfo[] tempdirInfos = rootPath.DirektoryInformation.GetDirectories();
+            DirectoryInfo[] tempdirInfos = rootNode.DirektoryInformation.GetDirectories();
 
             if (tempdirInfos.Length != 0)
             {
@@ -82,11 +81,15 @@ namespace PcCrawler
                     try
                     {
                         DirectoryNode newNode = new DirectoryNode(dirInfo);
-                        rootPath.ChildNodes.Add(newNode);
+                        rootNode.ChildNodes.Add(newNode);
+                        rootNode.IsReadable = true;
+
+                        //Call the next node 
                         direktoryWalker(newNode);
                     }
                     catch (Exception e)
                     {
+                        rootNode.IsReadable = false;
                         Debug.Print("Can´t read dirs in {0}", dirInfo.FullName);
                     }
                 }
