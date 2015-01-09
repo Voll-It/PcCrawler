@@ -64,7 +64,6 @@ namespace PcCrawler
 
         private void bt_test_Click(object sender, EventArgs e)
         {
-            propertyGrid1.
             using (Form waitingForm = new UserInformation("Reading Filesystem"))
             {
                 waitingForm.Show(this);
@@ -83,6 +82,19 @@ namespace PcCrawler
 
                 waitingForm.Hide();
                 this.Enabled = true;
+            }
+        }
+
+        private void tv_test_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+
+            object nodeData = e.Node.Tag;
+            if(nodeData is DirectoryNode)
+            {
+                DirectoryNode dNode = nodeData as DirectoryNode;
+                lb_name.Text = dNode.DirektoryInformation.Name;
+                lb_fullpath.Text = dNode.DirektoryInformation.FullName;
+                
             }
         }
     }

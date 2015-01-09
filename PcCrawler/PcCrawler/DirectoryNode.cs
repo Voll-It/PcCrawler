@@ -35,6 +35,7 @@ namespace PcCrawler
 
 
         public bool IsReadable { get; set; }
+        public bool IsRootDirectory { get; set; }
 
         /// <summary>
         /// 
@@ -45,6 +46,11 @@ namespace PcCrawler
             this.DirektoryInformation = DirInfo;
             this.ChildNodes = new List<DirectoryNode>();
             this.FileInformations = new List<KeyValuePair<string, FileInfo>>();
+        }
+
+        public DirectoryNode(DirectoryInfo DirInfo,bool isroot) : this(DirInfo)
+        {
+            this.IsRootDirectory = isroot;
         }
 
         public override string ToString()

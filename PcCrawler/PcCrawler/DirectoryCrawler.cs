@@ -43,7 +43,7 @@ namespace PcCrawler
             for (int i = 0; i < allDrives.Length; i++)
             {
                 DriveInfo curDriveInfo = allDrives[i];
-
+                //new DriveInfo()
                 if (curDriveInfo.DriveType == DriveType.Fixed)
                     drives.Add(curDriveInfo);    
             }
@@ -57,7 +57,7 @@ namespace PcCrawler
             foreach (var drive in drives)
             {
                 Tools.DebugTools.StartTimeWatch(drive.Name);
-                DirectoryNode rootNode = new DirectoryNode(new DirectoryInfo(drive.Name));
+                DirectoryNode rootNode = new DirectoryNode(new DirectoryInfo(drive.Name), true);
                 DirektoryRootNodes.Add(rootNode);
                 direktoryWalker(rootNode);
                 Tools.DebugTools.StopTimeWatch(drive.Name);
