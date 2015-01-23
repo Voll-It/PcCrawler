@@ -31,23 +31,55 @@
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label5;
+            System.Windows.Forms.ColumnHeader chName;
+            System.Windows.Forms.ColumnHeader chHash;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Crawler));
             this.tv_test = new System.Windows.Forms.TreeView();
             this.bt_test = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lb_name = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lb_fullpath = new System.Windows.Forms.Label();
             this.lb_size = new System.Windows.Forms.Label();
+            this.lb_fullpath = new System.Windows.Forms.Label();
+            this.lb_name = new System.Windows.Forms.Label();
+            this.lvFiles = new System.Windows.Forms.ListView();
             label1 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
+            chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            chHash = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(6, 16);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(35, 13);
+            label1.TabIndex = 2;
+            label1.Text = "Name";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(6, 29);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(48, 13);
+            label3.TabIndex = 4;
+            label3.Text = "Full Path";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(6, 42);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(27, 13);
+            label5.TabIndex = 6;
+            label5.Text = "Size";
             // 
             // tv_test
             // 
@@ -82,29 +114,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lvFiles);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.bt_test);
             this.splitContainer1.Size = new System.Drawing.Size(1170, 588);
             this.splitContainer1.SplitterDistance = 390;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(6, 16);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(35, 13);
-            label1.TabIndex = 2;
-            label1.Text = "Name";
-            // 
-            // lb_name
-            // 
-            this.lb_name.AutoSize = true;
-            this.lb_name.Location = new System.Drawing.Point(73, 16);
-            this.lb_name.Name = "lb_name";
-            this.lb_name.Size = new System.Drawing.Size(47, 13);
-            this.lb_name.TabIndex = 3;
-            this.lb_name.Text = "lb_name";
             // 
             // groupBox1
             // 
@@ -121,14 +136,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informations";
             // 
-            // label3
+            // lb_size
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(6, 29);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(48, 13);
-            label3.TabIndex = 4;
-            label3.Text = "Full Path";
+            this.lb_size.AutoSize = true;
+            this.lb_size.Location = new System.Drawing.Point(73, 42);
+            this.lb_size.Name = "lb_size";
+            this.lb_size.Size = new System.Drawing.Size(39, 13);
+            this.lb_size.TabIndex = 7;
+            this.lb_size.Tag = "";
+            this.lb_size.Text = "lb_size";
             // 
             // lb_fullpath
             // 
@@ -139,24 +155,36 @@
             this.lb_fullpath.TabIndex = 5;
             this.lb_fullpath.Text = "lb_fullpath";
             // 
-            // label5
+            // lb_name
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(6, 42);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(27, 13);
-            label5.TabIndex = 6;
-            label5.Text = "Size";
+            this.lb_name.AutoSize = true;
+            this.lb_name.Location = new System.Drawing.Point(73, 16);
+            this.lb_name.Name = "lb_name";
+            this.lb_name.Size = new System.Drawing.Size(47, 13);
+            this.lb_name.TabIndex = 3;
+            this.lb_name.Text = "lb_name";
             // 
-            // lb_size
+            // lvFiles
             // 
-            this.lb_size.AutoSize = true;
-            this.lb_size.Location = new System.Drawing.Point(73, 42);
-            this.lb_size.Name = "lb_size";
-            this.lb_size.Size = new System.Drawing.Size(39, 13);
-            this.lb_size.TabIndex = 7;
-            this.lb_size.Tag = "";
-            this.lb_size.Text = "lb_size";
+            this.lvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            chName,
+            chHash});
+            this.lvFiles.FullRowSelect = true;
+            this.lvFiles.GridLines = true;
+            this.lvFiles.Location = new System.Drawing.Point(14, 119);
+            this.lvFiles.Name = "lvFiles";
+            this.lvFiles.Size = new System.Drawing.Size(629, 337);
+            this.lvFiles.TabIndex = 5;
+            this.lvFiles.UseCompatibleStateImageBehavior = false;
+            this.lvFiles.View = System.Windows.Forms.View.Details;
+            // 
+            // chName
+            // 
+            chName.Text = "Name";
+            // 
+            // chHash
+            // 
+            chHash.Text = "Hash";
             // 
             // Crawler
             // 
@@ -188,6 +216,7 @@
         private System.Windows.Forms.Label lb_size;
         private System.Windows.Forms.Label lb_fullpath;
         private System.Windows.Forms.Label lb_name;
+        private System.Windows.Forms.ListView lvFiles;
     }
 }
 

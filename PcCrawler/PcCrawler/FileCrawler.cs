@@ -39,7 +39,7 @@ namespace PcCrawler
         public void Crawl()
         {
             Tools.DebugTools.StartTimeWatch("FileCrawlerStart");
-            //directoryWalker(rootNode);
+            directoryWalker(rootNode);
             Tools.DebugTools.StopTimeWatch("FileCrawlerStart");
         }
 

@@ -38,7 +38,7 @@ namespace PcCrawler
 
         private void Form1_Load(object sender, EventArgs e)
         {
- 
+
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace PcCrawler
                 DirectoryCrawler dCrawler = new DirectoryCrawler();
                 dCrawler.Crawl();
                 FileCrawler fCrawler = new FileCrawler(dCrawler.DirektoryRootNodes.ElementAt(0));
-                fCrawler.Crawl();
+                //fCrawler.Crawl();
 
                 foreach (var directoryRootNode in dCrawler.DirektoryRootNodes)
                 {
@@ -87,14 +87,33 @@ namespace PcCrawler
 
         private void tv_test_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-
             object nodeData = e.Node.Tag;
             if(nodeData is DirectoryNode)
             {
                 DirectoryNode dNode = nodeData as DirectoryNode;
+                lvFiles.Items.Clear();
                 lb_name.Text = dNode.DirektoryInformation.Name;
                 lb_fullpath.Text = dNode.DirektoryInformation.FullName;
+
                 
+                long fileSize = 0;
+
+                try
+                {
+                    foreach (var file in dNode.DirektoryInformation.GetFiles())
+                    {
+                        fileSize += file.Length;
+                    }
+                }
+                catch (Exception){}
+
+                lb_size.Text = fileSize / 8.0 + " Kbytes";
+
+                foreach (var item in dNode.FileInformations)
+                {
+                    ListViewItem lvItem = lvFiles.Items.Add(item.Value.Name);
+                    lvItem.SubItems.Add(item.Key);
+                }
             }
         }
     }
